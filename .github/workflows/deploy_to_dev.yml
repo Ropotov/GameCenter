@@ -1,6 +1,6 @@
 name: Check code quality
 run-name: Check code quality with detekt
-on: [ push ]
+on: [ pull_request ]
 jobs:
   Detekt:
     runs-on: ubuntu-latest
