@@ -1,0 +1,26 @@
+name: Check code quality
+run-name: Check code quality with detekt
+on: [ pull_request ]
+jobs:
+  Detekt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: 17
+
+      - name: Grant execute permission to gradlew
+        run: chmod +x gradlew
+
+      - name: Build
+        uses: gradle/gradle-build-action@v3
+        with:
+          cache-disabled: true
+
+      - name: Detekt
+        shell: bash
+        run: ./gradlew detekt
