@@ -18,4 +18,4 @@ jobs:
 
       - name: Detekt
         shell: bash
-        run: ./gradle detekt
+        run: ./gradlew detekt
