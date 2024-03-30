@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "GameCenter"
 include(":app")
- 
+include(":gamesapi")
