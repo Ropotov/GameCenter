@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.parcelize) apply false
     alias(libs.plugins.detect) apply false
+    alias(libs.plugins.jetbrainsKotlinJvm) apply false
 }
 
 allprojects.forEach { project ->

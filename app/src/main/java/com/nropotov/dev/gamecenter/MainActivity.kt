@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import com.nropotov.dev.gamecenter.ui.theme.GameCenterTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
