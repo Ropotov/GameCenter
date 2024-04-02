@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.lifecycle.ViewModelProvider
 import com.nropotov.dev.gamecenter.ui.theme.GameCenterTheme
-import com.nropotov.dev.games.presentation.GamesScreen
+import com.nropotov.dev.games.presentation.GamesListScreen
 import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             GameCenterTheme {
-                GamesScreen(viewmodelFactory)
+                GamesListScreen(viewmodelFactory)
             }
         }
     }

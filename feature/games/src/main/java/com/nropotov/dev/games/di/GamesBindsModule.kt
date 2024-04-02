@@ -8,7 +8,6 @@ import dagger.Module
 
 @Module
 interface GamesBindsModule {
-
     @Binds
     fun bindsGetAllGamesUseCase(impl: GetAllGamesUseCaseImpl) : GetAllGamesUseCase
 

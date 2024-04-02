@@ -16,8 +16,8 @@ class DaggerViewModelFactory @Inject constructor(
         try {
             @Suppress("UNCHECKED_CAST")
             return creator.get() as T
-        } catch (e: Exception) {
-            throw RuntimeException(e)
+        } catch (exception: Exception) {
+            throw RuntimeException(exception)
         }
     }
 }

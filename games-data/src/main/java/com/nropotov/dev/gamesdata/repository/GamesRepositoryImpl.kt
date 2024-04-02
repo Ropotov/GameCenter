@@ -1,4 +1,4 @@
-package com.nropotov.dev.games_data.repository
+package com.nropotov.dev.gamesdata.repository
 
 import com.nropotov.dev.games.domain.models.UiGamesModel
 import com.nropotov.dev.games.domain.repository.GamesRepository
@@ -27,5 +27,3 @@ class GamesRepositoryImpl @Inject constructor(
         } ?: emptyList()
     }
 }
-
-

@@ -31,6 +31,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    detekt {
+        toolVersion = "1.23.3"
+        config.setFrom(file("$rootDir/config/detekt.yml"))
+        buildUponDefaultConfig = true
+    }
 }
 
 dependencies {

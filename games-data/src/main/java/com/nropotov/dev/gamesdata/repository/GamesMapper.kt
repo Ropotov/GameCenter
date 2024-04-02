@@ -1,4 +1,4 @@
-package com.nropotov.dev.games_data.repository
+package com.nropotov.dev.gamesdata.repository
 
 import com.nropotov.dev.games.domain.models.UiGamePlatform
 import com.nropotov.dev.games.domain.models.UiGamesModel
@@ -11,9 +11,9 @@ class GamesMapper @Inject constructor() {
     fun mapGamesModelToUiGamesModel(gamesModel: GamesModel): UiGamesModel =
         UiGamesModel(
             id = gamesModel.id ?: 0,
-            name = gamesModel.name ?: emptyString(),
-            releaseDate = gamesModel.releaseDate ?: emptyString(),
-            imageUrl = gamesModel.imageUrl ?: emptyString(),
+            name = gamesModel.name ?: EMPTY_STRING,
+            releaseDate = gamesModel.releaseDate ?: EMPTY_STRING,
+            imageUrl = gamesModel.imageUrl ?: EMPTY_STRING,
             rating = gamesModel.rating ?: 0.0,
             ratingTop = gamesModel.ratingTop ?: 0,
             metacriticPercent = gamesModel.metacriticPercent ?: 0,
@@ -23,8 +23,10 @@ class GamesMapper @Inject constructor() {
     private fun mapGamesModelToUiGamesModel(platform: GamePlatform): UiGamePlatform =
         UiGamePlatform(
             id = platform.id ?: 0,
-            name = platform.name ?: emptyString()
+            name = platform.name ?: EMPTY_STRING
         )
 
-    private fun emptyString(): String = ""
+    companion object{
+        const val EMPTY_STRING: String = ""
+    }
 }

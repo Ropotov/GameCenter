@@ -12,14 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun GamesScreen(viewModelFactory: ViewModelProvider.Factory) {
-    GamesScreen(
+fun GamesListScreen(viewModelFactory: ViewModelProvider.Factory) {
+    GamesListScreen(
         viewModel = viewModel(factory = viewModelFactory)
     )
 }
 
 @Composable
-internal fun GamesScreen(
+internal fun GamesListScreen(
     viewModel: GamesScreenViewModel
 ) {
 

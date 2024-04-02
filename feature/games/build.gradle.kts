@@ -40,6 +40,12 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
+
+    detekt {
+        toolVersion = "1.23.3"
+        config.setFrom(file("$rootDir/config/detekt.yml"))
+        buildUponDefaultConfig = true
+    }
 }
 
 dependencies {
