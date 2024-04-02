@@ -10,7 +10,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/gamesapi" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/games" />
+            <option value="$PROJECT_DIR$/games-api" />
+            <option value="$PROJECT_DIR$/games-data" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

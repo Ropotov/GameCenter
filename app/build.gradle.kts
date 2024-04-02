@@ -96,5 +96,7 @@ dependencies {
     implementation(libs.dagger.core)
     ksp(libs.dagger.compiler)
 
-    implementation(project(":gamesapi"))
+    implementation(project(":games-api"))
+    implementation(project(":games-data"))
+    implementation(project(":feature:games"))
 }
