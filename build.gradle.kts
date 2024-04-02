@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.parcelize) apply false
     alias(libs.plugins.detect) apply false
     alias(libs.plugins.jetbrainsKotlinJvm) apply false
+    alias(libs.plugins.androidLibrary) apply false
 }
 
 allprojects.forEach { project ->
