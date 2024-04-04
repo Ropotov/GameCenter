@@ -99,4 +99,5 @@ dependencies {
     implementation(project(":games-api"))
     implementation(project(":games-data"))
     implementation(project(":feature:games"))
+    implementation(project(":common"))
 }
