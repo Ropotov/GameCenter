@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.parcelize)
 }
 
 android {
-    namespace = "com.nropotov.dev.games"
+    namespace = "com.nropotov.dev.common"
     compileSdk = 34
 
     defaultConfig {
@@ -14,6 +12,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildFeatures {
+        compose = true
     }
 
     buildTypes {
@@ -33,18 +35,14 @@ android {
         jvmTarget = "1.8"
     }
 
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
-    }
-
     detekt {
         toolVersion = "1.23.3"
         config.setFrom(file("$rootDir/config/detekt.yml"))
         buildUponDefaultConfig = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
 }
 
@@ -58,15 +56,5 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.material3)
-    implementation(libs.glide.compose)
-    implementation(libs.dagger.core)
-    ksp(libs.dagger.compiler)
-    implementation(libs.lifecycle.viewmodel)
-    implementation(libs.lifecycle.viewmodel.compose)
-    implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.lifecycle.runtime)
-
-    implementation(project(":games-api"))
-    implementation(project(":common"))
 
 }

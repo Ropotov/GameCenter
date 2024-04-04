@@ -3,9 +3,11 @@ package com.nropotov.dev.games.presentation
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -13,8 +15,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.MaterialTheme
@@ -27,7 +31,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
@@ -40,6 +43,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.nropotov.dev.common.components.CollapsibleToolbar
+import com.nropotov.dev.common.theme.GameCenterTheme
 import com.nropotov.dev.games.R
 import com.nropotov.dev.games.domain.models.UiGamesModel
 
@@ -58,21 +63,55 @@ internal fun GamesListScreen(
 ) {
 
     val games by viewModel.games.collectAsState()
+    val lazyScrollState = rememberLazyListState()
 
-    Column {
-        GamesBlock(
-            title = "Games",
-            subtitle = "MoreGames",
-            items = games,
-            onClickTitleBlock = { },
-            onClickItem = { }
-        )
-        GamesBlock(
-            title = "Games",
-            items = games,
-            onClickItem = { }
-        )
+    LazyColumn(
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.background),
+        state = lazyScrollState
+    ) {
+        item {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp)
+            ) {
+                Text(
+                    text = "Game Center",
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
+        }
+        item {
+            GamesBlock(
+                title = "Games",
+                subtitle = "MoreGames",
+                items = games,
+                onClickTitleBlock = { },
+                onClickItem = { }
+            )
+        }
+        item {
+            GamesBlock(
+                title = "Games",
+                subtitle = "MoreGames",
+                items = games,
+                onClickTitleBlock = { },
+                onClickItem = { }
+            )
+        }
+        item {
+            GamesBlock(
+                title = "Games",
+                items = games,
+                onClickItem = { }
+            )
+        }
     }
+    CollapsibleToolbar(
+        title = "Game Center",
+        lazyScrollState = lazyScrollState,
+    )
 }
 
 @Composable
@@ -152,9 +191,17 @@ fun TitleBlock(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
-            Text(text = title, fontSize = 16.sp)
+            Text(
+                text = title,
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.titleLarge
+            )
             subtitle?.let {
-                Text(text = subtitle, fontSize = 12.sp)
+                Text(
+                    text = subtitle,
+                    color = MaterialTheme.colorScheme.secondary,
+                    style = MaterialTheme.typography.labelSmall
+                )
             }
         }
         if (onClick != null) Image(
@@ -167,7 +214,7 @@ fun TitleBlock(
 @Preview(showBackground = true)
 @Composable
 fun TitleBlockPreview() {
-    MaterialTheme {
+    GameCenterTheme {
         TitleBlock(title = "Games", subtitle = "More games") {}
     }
 }
