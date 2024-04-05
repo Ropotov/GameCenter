@@ -77,12 +77,11 @@ fun CollapsibleToolbar(
                 )
             }
             Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.Center),
+                modifier = Modifier.fillMaxWidth(),
                 text = title,
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.primary
             )
         }
     }
