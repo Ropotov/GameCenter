@@ -32,10 +32,10 @@ private const val COLLAPSED_TOOLBAR_ID = "collapsed_toolbar"
 
 @Composable
 fun CollapsibleToolbar(
+    modifier: Modifier = Modifier,
     title: String,
     lazyScrollState: LazyListState,
     onNavigateUp: (() -> Unit)? = null,
-    modifier: Modifier = Modifier,
 ) {
     val isItemIndexZeroOrLess by remember {
         derivedStateOf { lazyScrollState.firstVisibleItemScrollOffset <= 0 }
