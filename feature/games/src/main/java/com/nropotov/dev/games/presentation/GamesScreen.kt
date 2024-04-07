@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -66,18 +67,18 @@ internal fun GamesListScreen(
 
     LazyColumn(
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.background),
+            .background(GameCenterTheme.colors.primaryBackgroundColor),
         state = lazyScrollState
     ) {
         item {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(24.dp)
+                    .padding(GameCenterTheme.dimens.dp24)
             ) {
                 Text(
                     text = "Game Center",
-                    color = MaterialTheme.colorScheme.primary,
+                    color = GameCenterTheme.colors.primaryTextColor,
                     style = MaterialTheme.typography.titleLarge
                 )
             }
@@ -109,7 +110,7 @@ internal fun GamesListScreen(
         }
     }
     CollapsibleToolbar(
-        title = "Game Center",
+        title = stringResource(R.string.game_center),
         lazyScrollState = lazyScrollState,
     )
 }
@@ -129,8 +130,8 @@ fun GamesBlock(
             onClickTitleBlock
         )
         LazyRow(
-            contentPadding = PaddingValues(horizontal = 12.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            contentPadding = PaddingValues(horizontal = GameCenterTheme.dimens.dp12),
+            horizontalArrangement = Arrangement.spacedBy(GameCenterTheme.dimens.dp8)
         ) {
             items(items = items) {
                 PageCardItem(
@@ -156,23 +157,24 @@ fun PageCardItem(
     ) {
         GlideImage(
             model = game.imageUrl,
-            contentDescription = "Game image",
+            contentDescription = stringResource(R.string.game_image),
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(elementSize)
                 .clip(MaterialTheme.shapes.extraLarge)
                 .border(
-                    BorderStroke(width = 1.dp, color = Color.Black),
+                    BorderStroke(width = GameCenterTheme.dimens.dp1, color = Color.Black),
                     shape = MaterialTheme.shapes.extraLarge
                 )
         )
         Text(
             text = game.name,
-            color = MaterialTheme.colorScheme.primary,
+            color = GameCenterTheme.colors.primaryTextColor,
             style = MaterialTheme.typography.bodyLarge,
-            maxLines = 2,
             minLines = 2,
+            maxLines = 2,
             modifier = Modifier
+                .width(elementSize)
                 .wrapContentHeight()
         )
     }
@@ -187,20 +189,20 @@ fun TitleBlock(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp),
+            .padding(GameCenterTheme.dimens.dp12),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
             Text(
                 text = title,
-                color = MaterialTheme.colorScheme.primary,
+                color = GameCenterTheme.colors.primaryTextColor,
                 style = MaterialTheme.typography.titleLarge
             )
             subtitle?.let {
                 Text(
                     text = subtitle,
-                    color = MaterialTheme.colorScheme.secondary,
+                    color = GameCenterTheme.colors.secondaryTextColor,
                     style = MaterialTheme.typography.labelSmall
                 )
             }
@@ -225,9 +227,10 @@ private fun getElementSize(): Dp {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
     val screenHeight = configuration.screenHeightDp.dp
+    val dimens = GameCenterTheme.dimens
     val elementWidthSize =
-        (screenWidth - 12.dp - 8.dp * FULL_VISIBLE_ITEMS_COUNT - 20.dp) / FULL_VISIBLE_ITEMS_COUNT
-    val elementHeightSize = (screenHeight - 12.dp) / FULL_VISIBLE_ITEMS_COUNT
+        (screenWidth - dimens.dp12 - dimens.dp8 * FULL_VISIBLE_ITEMS_COUNT - dimens.dp20) / FULL_VISIBLE_ITEMS_COUNT
+    val elementHeightSize = (screenHeight - dimens.dp12) / FULL_VISIBLE_ITEMS_COUNT
     val elementSize by remember {
         mutableStateOf(
             when (configuration.orientation) {
