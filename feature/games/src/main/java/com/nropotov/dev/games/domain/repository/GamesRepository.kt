@@ -5,5 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface GamesRepository {
     suspend fun getAllGames(): List<UiGamesModel>
+    suspend fun getAllGamesAlongPC(): List<UiGamesModel>
+    suspend fun getAllGamesAlongPS5(): List<UiGamesModel>
     suspend fun getSearchGames(query: String): List<UiGamesModel>
 }
