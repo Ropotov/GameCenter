@@ -16,14 +16,14 @@ interface GamesApi {
     suspend fun loadAllGamesAlongPC(
         @Query("page") page: Int = 1,
         @Query("page_size") pageSize: Int = 20,
-        @Query("platform") platform: Platform = Platform.PC
+        @Query("platform") platform: Int = Platform.PC.id
     ): GamesResponse
 
     @GET("games")
     suspend fun loadAllGamesAlongPS5(
         @Query("page") page: Int = 1,
         @Query("page_size") pageSize: Int = 20,
-        @Query("platform") platform: Platform = Platform.PS5
+        @Query("platform") platform: Int = Platform.PS5.id
     ): GamesResponse
 
     @GET("games")
