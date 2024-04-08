@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,6 +23,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -62,11 +64,41 @@ internal fun GamesListScreen(
     viewModel: GamesScreenViewModel
 ) {
 
-    val games by viewModel.games.collectAsState()
+    val state by viewModel.screenState.collectAsState()
+
+    when (val state: GamesUiState = state) {
+        GamesUiState.Error -> {}
+
+        GamesUiState.Loading -> {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .size(GameCenterTheme.dimens.dp24)
+                        .align(Alignment.Center)
+                )
+            }
+        }
+
+        is GamesUiState.Success -> {
+            GamesScreen(state.pcGames, state.ps5Games)
+        }
+    }
+}
+
+@Composable
+fun GamesScreen(
+    pcGames: List<UiGamesModel>,
+    ps5Games: List<UiGamesModel>,
+) {
+
     val lazyScrollState = rememberLazyListState()
 
     LazyColumn(
         modifier = Modifier
+            .fillMaxSize()
             .background(GameCenterTheme.colors.primaryBackgroundColor),
         state = lazyScrollState
     ) {
@@ -83,30 +115,25 @@ internal fun GamesListScreen(
                 )
             }
         }
+
         item {
             GamesBlock(
-                title = "Games",
-                subtitle = "MoreGames",
-                items = games,
-                onClickTitleBlock = { },
-                onClickItem = { }
-            )
+                title = stringResource(R.string.pc_games_title),
+                subtitle = stringResource(R.string.pc_games_subtitle),
+                items = pcGames
+            ) {
+
+            }
         }
+
         item {
             GamesBlock(
-                title = "Games",
-                subtitle = "MoreGames",
-                items = games,
-                onClickTitleBlock = { },
-                onClickItem = { }
-            )
-        }
-        item {
-            GamesBlock(
-                title = "Games",
-                items = games,
-                onClickItem = { }
-            )
+                title = stringResource(R.string.ps5_games_title),
+                subtitle = stringResource(R.string.ps5_games_subtitle),
+                items = ps5Games
+            ) {
+
+            }
         }
     }
     CollapsibleToolbar(
@@ -114,6 +141,7 @@ internal fun GamesListScreen(
         lazyScrollState = lazyScrollState,
     )
 }
+
 
 @Composable
 fun GamesBlock(

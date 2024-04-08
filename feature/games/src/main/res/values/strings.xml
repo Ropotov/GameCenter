@@ -3,4 +3,8 @@
     <string name="going_inside_the_block_description">Going inside the block</string>
     <string name="game_image">Game image</string>
     <string name="game_center">Game Center</string>
+    <string name="pc_games_title">Игры для PC</string>
+    <string name="pc_games_subtitle">Для бояр</string>
+    <string name="ps5_games_title">Игры для Playstation 5</string>
+    <string name="ps5_games_subtitle">Для любителей играть с дивана</string>
 </resources>
