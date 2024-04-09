@@ -37,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -67,24 +68,42 @@ internal fun GamesListScreen(
     val state by viewModel.screenState.collectAsState()
 
     when (val state: GamesUiState = state) {
-        GamesUiState.Error -> {}
+        GamesUiState.Error -> ErrorState()
+        GamesUiState.Loading -> LoadingState()
+        is GamesUiState.Success -> GamesScreen(state.pcGames, state.ps5Games)
+    }
+}
 
-        GamesUiState.Loading -> {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .size(GameCenterTheme.dimens.dp24)
-                        .align(Alignment.Center)
-                )
-            }
-        }
+@Composable
+fun ErrorState() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_oops),
+            contentDescription = stringResource(R.string.not_available)
+        )
+        Text(
+            modifier = Modifier.padding(GameCenterTheme.dimens.dp36),
+            text = stringResource(R.string.error_message)
+        )
+    }
+}
 
-        is GamesUiState.Success -> {
-            GamesScreen(state.pcGames, state.ps5Games)
-        }
+@Composable
+fun LoadingState() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        CircularProgressIndicator(
+            color = GameCenterTheme.colors.primaryTextColor,
+            modifier = Modifier
+                .size(GameCenterTheme.dimens.dp40)
+                .align(Alignment.Center)
+        )
     }
 }
 

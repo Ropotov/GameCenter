@@ -7,4 +7,6 @@
     <string name="pc_games_subtitle">Для бояр</string>
     <string name="ps5_games_title">Игры для Playstation 5</string>
     <string name="ps5_games_subtitle">Для любителей играть с дивана</string>
+    <string name="not_available">not_available</string>
+    <string name="error_message">Кажется что-то пошло не так</string>
 </resources>
